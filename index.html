@@ -37,7 +37,7 @@
 
 		<script src="js/three.js"></script>
 		<script src="js/controls/DeviceOrientationControls.js"></script>
-
+    <script src="js/controls/OrbitControls.js"></script>
 		<script>
 			(function() {
 				  "use strict";
@@ -59,7 +59,6 @@
 
 						camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100);
 
-						controls = new THREE.DeviceOrientationControls( camera );
 
 						scene = new THREE.Scene();
 
@@ -72,6 +71,12 @@
 
 						var mesh = new THREE.Mesh( geometry, material );
 						scene.add( mesh );
+
+						if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
+							controls = new THREE.DeviceOrientationControls( camera );
+						} else {
+							window.location.replace("./gallery.html")
+						}
 
 						// var geometry = new THREE.BoxGeometry( 100, 100, 100, 4, 4, 4 );
 						// var material = new THREE.MeshBasicMaterial( { color: 0x00ffff, side: THREE.BackSide, wireframe: true } );
